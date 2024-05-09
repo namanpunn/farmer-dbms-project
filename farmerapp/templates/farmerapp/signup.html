@@ -1,0 +1,39 @@
+{% extends 'auth.html' %}
+{% block title %}
+Signup
+{% endblock title %}
+{% block content %}
+ <h1 class="mb-1"><span>Sign Up</span> </h1>
+
+ <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+ </div>
+
+ <form class=" text-white py-3 px-3" action="{% url 'signup' %}" method="POST">
+   {% csrf_token %}
+   {% for field in form %}
+   <div class="form-group">
+     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+     <span class="form-control mb-2" name="username" id="username"> 
+      {{ field }}>
+     </span>
+     {% for error in field.errors %}
+       <div class="form-control mb-2">{{ error }}</div>
+     {% endfor %}
+   </div>
+   {% endfor %}
+
+   <input type="text" name="honeypot" style="display:none;">
+
+   <br>
+   <button type="submit" name="signup-button" class="form-control bg-success text-white" >Sign In</button>
+   <p class="mb-2 pb-0">Already User?</p>
+    
+   <a href="{% url 'login' %}" class="about-btn scrollto">Login</a>
+ </form>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+{% endblock content %}

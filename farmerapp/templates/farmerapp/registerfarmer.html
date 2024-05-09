@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h3 class="text-center"><span>Register Farmers Details</span> </h3>
+  
+
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+ 
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+<form action="{% url 'register' %}" method="post">
+{% csrf_token %}
+{% for field in FarmerForm %}
+  <div class="">
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <span class="form-control" name="{{ field.id_for_label }}" id="{{ field.id_for_label }}" required>{{ field }}</span>
+  <br>
+  </div>
+{% endfor %}
+
+<br>
+  
+  <button type="submit" class="btn btn-success  btn-block">Save Records</button>
+</form>
+<br>
+<br>
+
+</div>
+
+<div class="col-md-4"></div>
+
+</div></div>
+
+
+
+{% endblock  %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+Add Farming
+{% endblock title %}
+
+{% block content %}
+ <h3 class="text-center bg-success text-white"><span>Add Farming</span> </h3>
+  
+
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+
+</div>
+
+<br>
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+<form action="{% url 'addfarming' %}" method="post">
+  {% csrf_token %}
+  {% for field in addfarmingform %}
+  <div class="form-group">
+  <label for="dept">{{field.label}}</label>
+  <span class="form-control" name="farmi ng" id="farming">{{field}}</span>
+  </div>
+  <br>
+  {% endfor %}
+
+    <button type="submit" class="btn btn-success btn-sm btn-block">Add Farming</button>
+</form>
+<br>
+<br>
+
+</div>
+
+<div class="col-md-4"></div>
+
+</div></div>
+
+
+
+{% endblock %}
