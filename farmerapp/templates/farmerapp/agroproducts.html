@@ -21,17 +21,17 @@ Agro Products
 <div class="container mt-3">
 <div class="row">
 
-  {% for p in query %}
+  {% for p in agroproduct %}
   <div class="col-sm-4">
     <div class="card">
       <div class="card-body">
-        <b><h5 class="card-title">{{p.productname}}</h5></b>
-        <b>Price : {{p.price}}</b>
+        <b><h5 class="card-title">{{p.Product_name}}</h5></b>
+        <b>Price : {{p.Price}}</b>
         <hr>
         <p class="card-text">{{p.productdesc}}</p>
         
  
-        <p>Owner : {{p.username}}</p>
+        <p>Owner : {{p.farmer_name}}</p>
         <p>Email : {{p.email}}</p>
       
 

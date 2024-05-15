@@ -45,3 +45,14 @@ class Farmer(models.Model):
 
     def __str__(self):
         return self.farmer_name
+
+class AgroProduct(models.Model):
+    farmer_name = models.CharField(max_length=200, null=True)
+    Product_name = models.CharField(max_length=10)
+    email = models.EmailField(unique=True, null=True)
+    Product_description = models.TextField(null=True, blank=True)
+    Price = models.IntegerField(default=0)
+
+
+    def __str__(self):
+        return self.Product_name

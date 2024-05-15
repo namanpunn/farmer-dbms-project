@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
 from django.shortcuts import render, redirect
-from .models import CustomUser, Farmer, AddFarming
-from .forms import MyUserCreationForm, FarmerForm, AddFarmingForm
+from .models import CustomUser, Farmer, AddFarming, AgroProduct
+from .forms import MyUserCreationForm, FarmerForm, AddFarmingForm, AgroProductForm
 from django.contrib.auth import authenticate, login as auth_login
 
 def home(request):
@@ -18,7 +18,16 @@ def register(request):
         farmerform = FarmerForm()
     return render(request, 'farmerapp/registerfarmer.html', {'FarmerForm': farmerform})
 
-
+def addagroproducts(request):
+    if request.method == 'POST':
+        productform = AgroProductForm(request.POST or None)
+        if productform.is_valid():
+            productform.save()
+            return redirect('agroproducts')
+    else:
+        productform = AgroProductForm()
+    context = {'AgroProductForm': productform, 'category': 'info', 'message': 'Add Agro Products'}
+    return render(request, 'farmerapp/addagroproducts.html', context)
 
 def addfarming(request):
     farming = AddFarming.objects.all()
@@ -32,6 +41,7 @@ def addfarming(request):
         form = AddFarmingForm()
     return render(request, 'farmerapp/addfarming.html', {'addfarmingform':form,'farming': farming})
 
+
 def farmer_details(request):
     # ... your code here ...
     farmer_list = Farmer.objects.all()
@@ -39,7 +49,9 @@ def farmer_details(request):
     return render(request, 'farmerapp/farmingdetails.html', context)
 
 def agroproducts(request):
-    return render(request, 'farmerapp/agroproducts.html', {})
+    agroproduct = AgroProduct.objects.all()
+    context = {'agroproduct': agroproduct, 'category': 'info', 'message': 'Farmer Details'}
+    return render(request, 'farmerapp/agroproducts.html', context)
 
 def records(request):
     return render(request, 'farmerapp/records.html', {})
@@ -74,8 +86,7 @@ def user_logout(request):
     logout(request)
     return redirect('home')
 
-def addagroproducts(request):
-    return render(request, 'farmerapp/addagroproducts.html', {})
+
 
 def edit(request):
     return render(request, 'farmerapp/edit.html', {})

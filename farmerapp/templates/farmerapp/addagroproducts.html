@@ -24,39 +24,15 @@ Add AgroProducts
 <div class="col-md-4"></div>
 <div class="col-md-4">
 
-<form action="/addagroproduct" method="post">
+<form action="{% url 'addagroproducts' %}" method="post">
+{% csrf_token %}
+{% for field in AgroProductForm %}
 <div class="form-group">
-
-<label for="username">Farmer Name</label>
-<input type="text" class="form-control" name="username" value="{{current_user.username}}" id="{{current_user.username}}" required>
+<label for="username">{{field.label}}</label>
+<span type="text" class="form-control" name="username" value="{{current_user.username}}" id="{{current_user.username}}" required>{{field}}</span>
 </div>
 <br>
-<div class="form-group">
-
-<label for="username">Farmer Email</label>
-<input type="email" class="form-control" name="email" value="{{current_user.email}}" id="{{current_user.email}}" required>
-</div>
-<br>
-<div class="form-group">
-
-<label for="rollno">Product Name</label>
-<input type="text" class="form-control" name="productname" id="productname" required>
-</div>
-<br>
-
-
-<div class="form-group">
-<label for="productdesc">Product Description</label>
-<textarea class="form-control" name="productdesc" id="productdesc" required></textarea>
-</div>
-<br>
-
-<div class="form-group">
-
-<label for="price">Price</label>
-<input type="number" class="form-control" name="price" id="price" required>
-</div>
-<br>
+{% endfor %}
   
   <button type="submit" class="btn btn-success  btn-block">Add Product</button>
 </form>
