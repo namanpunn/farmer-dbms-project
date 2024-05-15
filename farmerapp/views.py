@@ -32,9 +32,11 @@ def addfarming(request):
         form = AddFarmingForm()
     return render(request, 'farmerapp/addfarming.html', {'addfarmingform':form,'farming': farming})
 
-def farmingdetails(request):
-    farmers = Farmer.objects.all()
-    return render(request, 'farmerapp/farmingdetails.html', {'farmers': farmers})
+def farmer_details(request):
+    # ... your code here ...
+    farmer_list = Farmer.objects.all()
+    context = {'farmer_list': farmer_list, 'category': 'info', 'message': 'Farmer Details'}
+    return render(request, 'farmerapp/farmingdetails.html', context)
 
 def agroproducts(request):
     return render(request, 'farmerapp/agroproducts.html', {})
@@ -76,4 +78,7 @@ def addagroproducts(request):
     return render(request, 'farmerapp/addagroproducts.html', {})
 
 def edit(request):
+    return render(request, 'farmerapp/edit.html', {})
+
+def delete(request):
     return render(request, 'farmerapp/edit.html', {})

@@ -20,4 +20,4 @@ class FarmerForm(forms.ModelForm):
 class AddFarmingForm(forms.ModelForm):
     class Meta: 
         model = AddFarming
-        fields = ['type']
+        fields = '__all__'

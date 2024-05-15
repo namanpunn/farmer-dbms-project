@@ -31,21 +31,27 @@ Farmer Details
         </tr>
       </thead>
       <tbody>
-        {% for farmer in farmers %}
-          <tr>
-            <th scope="row">{{farmer.id}}</th>
-            <td>{{farmer.farmer_name}}</td>
-            <td>{{farmer.adhaarnumber}}</td>
-            <td>{{farmer.age}}</td>
-            <td>{{farmer.gender}}</td>
-            <td>{{farmer.phonenumber}}</td>
-            <td>{{farmer.address}}</td>
-            <td>{{farmer.farming}}</td>
-            <td><a href="/edit/{{post.rid}}"><button class="btn btn-success">Edit </button> </a> </td>
-            <td><a href="/delete/{{post.rid}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-success">Delete </button> </a> </td>
-            <td><a href="/addagroproduct"><button class="btn btn-success">ADD </button> </a> </td>
-          </tr>
-        {% endfor %}
+        {% for farmer in farmer_list %}  {# Change this line in your template #}
+        <tr>
+          <th scope="row">{{farmer.id}}</th>
+          <td>{{farmer.farmer_name}}</td>
+          <td>{{farmer.adhaarnumber}}</td>
+          <td>{{farmer.age}}</td>
+          <td>{{farmer.gender}}</td>
+          <td>{{farmer.phonenumber}}</td>
+          <td>{{farmer.address}}</td>
+          <td>{{ farmer.farming_type.farming_type }}</td>
+          <td>
+            <a href="{% url 'edit' %}"><button class="btn btn-success">Edit </button> </a>
+          </td>
+          <td>
+            <a href="{% url 'delete'  %}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-success">Delete </button> </a>
+          </td>
+          <td>
+            <a href="{% url 'addagroproducts' %}"><button class="btn btn-success">ADD </button> </a>
+          </td>
+        </tr>
+      {% endfor %}
       </tbody>
     </table>
   </div>
