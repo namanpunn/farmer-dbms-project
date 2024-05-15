@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login ,logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import CustomUser, Farmer, AddFarming, AgroProduct
 from .forms import MyUserCreationForm, FarmerForm, AddFarmingForm, AgroProductForm
 from django.contrib.auth import authenticate, login as auth_login
@@ -53,9 +53,6 @@ def agroproducts(request):
     context = {'agroproduct': agroproduct, 'category': 'info', 'message': 'Farmer Details'}
     return render(request, 'farmerapp/agroproducts.html', context)
 
-def records(request):
-    return render(request, 'farmerapp/records.html', {})
-
 
 
 def login(request):
@@ -88,8 +85,18 @@ def user_logout(request):
 
 
 
-def edit(request):
-    return render(request, 'farmerapp/edit.html', {})
+def edit(request, farmer_id):
+    farmer = get_object_or_404(Farmer, id=farmer_id)
+    if request.method == 'POST':
+        form = FarmerForm(request.POST, instance=farmer)
+        if form.is_valid():
+            form.save()
+            return redirect('home', farmer_id=farmer.id)
+    else:
+        form = FarmerForm(instance=farmer)
+    return render(request, 'farmerapp/edit.html', {'form': form})
 
-def delete(request):
-    return render(request, 'farmerapp/edit.html', {})
+def delete(request, farmer_id):
+    farmer = get_object_or_404(Farmer, id=farmer_id)
+    farmer.delete()
+    return redirect('farmingdetails')

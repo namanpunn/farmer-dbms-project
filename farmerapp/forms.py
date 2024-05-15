@@ -26,3 +26,4 @@ class AgroProductForm(forms.ModelForm):
     class Meta: 
         model = AgroProduct
         fields = '__all__'
+
